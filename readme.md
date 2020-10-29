@@ -1,7 +1,8 @@
-# reserva-sala
+# Salas
 
 Frontend que implementa regras para reserva de salas. Suporta
-como backend o [booked](https://www.bookedscheduler.com).
+como backend o [booked](https://www.bookedscheduler.com), 
+fornecendo listas em formato json.
 
 ## Instalação
 
@@ -29,10 +30,11 @@ php artisan serve
 
 ## Rotas
 
-Listas em json:
+Listas públicas em json:
 ```bash
 /api/salas
 /api/agendas
+/api/reservas/{agenda}
 ```
 
 ## Dicas

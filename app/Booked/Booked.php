@@ -4,7 +4,6 @@ namespace App\Booked;
 
 use GuzzleHttp\Client;
 
-
 class Booked
 {
     private $session;
@@ -52,7 +51,27 @@ class Booked
         return response()->json(json_decode($res->getBody()->getContents()));
     }
 
-    public function reservas()
+    /**
+     * Return Json reservations day list by schedule
+     * @param integer $agenda
+     * @return void
+     */
+    public function reservas($agenda)
+    {
+        $client = new Client();
+        $parameters = '?scheduleId=' . $agenda . '&startDateTime=' . "'2020-10-27T00:00:00-0200'" . '&endDateTime=' . "'2020-10-27T23:59:59-0200'";
+        $url = config('salas.bookedHost') . '/Reservations' . $parameters;
+        //dd($url);
+        $res = $client->request('GET', $url, [
+            'headers' => [
+                'X-Booked-SessionToken' => $this->session->sessionToken,
+                'X-Booked-UserId' => $this->session->userId,
+            ]
+        ]);
+        return response()->json(json_decode($res->getBody()->getContents()));
+    }
+
+    public function novaReserva()
     {
         $client = new Client();
         $res = $client->request('GET', config('salas.bookedHost') . '/Reservations/', [

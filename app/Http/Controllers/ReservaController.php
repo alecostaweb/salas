@@ -30,6 +30,17 @@ class ReservaController extends Controller
         return $booked->agendas();
     }
 
+    /**
+     * Display a listing of the day reservations by schedule.
+     * @param Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function reservations(Request $request)
+    {
+        $agenda = $request->agenda;
+        $booked = new Booked;
+        return $booked->reservas($agenda);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -40,7 +51,7 @@ class ReservaController extends Controller
     {
         //
         $booked = new Booked;
-        $booked->reservas();
+        $booked->novaReserva();
     }
 
     /**
